@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        @apply bg-black font-Roboto
+    }
+}
+
+@layer components {
+    .exact-active-class {
+        @apply font-bold text-white
+    }
+    .grid-center {
+        @apply grid place-items-center
+    }
+    .flex-between {
+        @apply flex justify-between items-center
+    }
+    .label {
+        @apply font-bold block text-white
+    }
+    .input-style {
+        @apply w-full appearance-none py-2 px-2 mt-2 rounded-md border border-purple-400 focus:outline-none focus:ring-1 focus:ring-purple-500
+    }
+    .error {
+        @apply font-bold text-red-500 pt-1
+    }
+
+    .animation-hover {
+        @apply rounded-full cursor-pointer w-[52px] h-[52px] xl:py-5 xl:px-4 xl:h-auto xl:w-auto transition duration-200 ease-in
+    }
+
+    .left-margin {
+        @apply flex-grow px-4 sm:ml-[72px] md:px-0 xl:ml-[275px] 
+    }
+    .background-animate {
+        background-size: 400%;
+    
+        -webkit-animation: AnimationName 3s ease infinite;
+        -moz-animation: AnimationName 3s ease infinite;
+        animation: AnimationName 3s ease infinite;
+      }
+    
+      @keyframes AnimationName {
+        0%,
+        100% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+      }
+}
