@@ -1,5 +1,5 @@
 <script setup>
-import { HomeIcon, CheckCircleIcon, FolderIcon, ChatIcon, UsersIcon, CalendarIcon, UserIcon, LightningBoltIcon } from "@heroicons/vue/outline";
+import { HomeIcon, CheckCircleIcon, ChatIcon, LightningBoltIcon } from "@heroicons/vue/outline";
 const sidebarMenu = [
     {
         label: "Overview",
@@ -12,35 +12,15 @@ const sidebarMenu = [
         path: "/create"
     },
     {
-        label : "My Tasks",
+        label : "Social Tasks",
         Icon : CheckCircleIcon,
         path: "/tasks"
-    },
-    {
-        label: "Projects",
-        Icon: FolderIcon,
-        path: "/projects"
     },
     {
         label: "Messages",
         Icon: ChatIcon,
         path: "/message"
     },
-    {
-        label: "Team Members",
-        Icon: UsersIcon,
-        path: "/members"
-    },
-    {
-        label: "Calendar",
-        Icon: CalendarIcon,
-        path: "/calendar"
-    },
-    {
-        label: "Profile",
-        Icon: UserIcon,
-        path: "/profile"
-    }
 ]
 </script>
 <template>

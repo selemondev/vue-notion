@@ -36,14 +36,6 @@ const router = createRouter({
       }
     },
     {
-      path: "/profile",
-      name: "profile",
-      component: () => import("../views/Profile.vue"),
-      meta: {
-        auth
-      }
-    },
-    {
       path: "/tasks",
       name: "tasks",
       component: () => import("../views/Tasks.vue"),
@@ -63,23 +55,6 @@ const router = createRouter({
       path: "/message",
       name: "message",
       component: () => import("../views/Message.vue"),
-      meta: {
-        auth
-      }
-    },
-    {
-      path: "/members",
-      name: "members",
-      component: () => import("../views/TeamMembers.vue"),
-      meta: {
-        auth
-      }
-    },
-
-    {
-      path: "/calendar",
-      name: "calendar",
-      component: () => import("../views/Calendar.vue"),
       meta: {
         auth
       }

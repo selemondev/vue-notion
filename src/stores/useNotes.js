@@ -1,15 +1,15 @@
 import { defineStore } from 'pinia'
 
-export const useAuthStore = defineStore({
-  id: 'auth',
+export const useNotesStore = defineStore({
+  id: 'notes',
   state: () => {
 		return {
-			notes: [],
+			notesData: [],
 		}
 	},
   actions: {
-    token(response) {
-      this.user_token = response
+    saveNotes(notes) {
+      this.notesData = notes
     }
   }
 });

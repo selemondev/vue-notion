@@ -5,6 +5,8 @@ import { uploadBytes, ref as storageRef, getDownloadURL } from "firebase/storage
 import { auth, db, storage } from "../firebaseConfig";
 import { useToast } from "vue-toastification";
 import { ref } from "vue";
+import { useRouter } from 'vue-router';
+const router = useRouter();
 const title = ref("");
 const description = ref("");
 const selectedImage = ref("");
@@ -21,8 +23,6 @@ const fileUpload = () => {
 };
 
 const currentUser = auth.currentUser;
-console.log(auth)
-
 const handleSubmitNote = async () => {
   loading.value = true;
 
@@ -57,7 +57,9 @@ const handleSubmitNote = async () => {
 
   toast.success("Note Created", {
     timeout: 4000
-  })
+  });
+
+  router.push("/tasks")
 };
 
 function removeSelectedImage() {
@@ -109,7 +111,7 @@ function removeSelectedImage() {
          <CameraIcon class="w-10 h-10 my-2 mx-4 md:w-12 md:h-12"/>
        </div>
       </label>
-      <input type="file" multiple hidden name="fileUpload" id="fileUpload" @change="fileUpload"/>
+      <input type="file" hidden name="fileUpload" id="fileUpload" @change="fileUpload"/>
     </div>
   </div>
 
