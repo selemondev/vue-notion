@@ -1,7 +1,8 @@
 <script setup>
+import CreateProfile from '../components/CreateProfile.vue';
 </script>
 <template>
-<section class="left-margin">
-    <p class="text-white">Hello Profile</p>
+<section class="left-margin grid-center">
+    <CreateProfile/>
 </section>
 </template>
