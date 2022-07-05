@@ -9,6 +9,7 @@ import Loader from "../components/Loader.vue";
 import dayjs from 'dayjs';
 const notes = ref([]);
 const loading = ref(false);
+const emailValue = ref("")
 const currentUser = ref("");
 const unsubscribe = () => {
     onAuthStateChanged(auth, (user) => {
@@ -26,8 +27,9 @@ watchEffect(() => {
             notesData.push({...doc.data(), id: doc.id})
         });
         notes.value = notesData;
-        loading.value = false;
+        emailValue.value = notes.value[0].email;
         console.log(notes.value)
+        loading.value = false;
     });
 
     return () => unsubscribe()
@@ -50,15 +52,15 @@ const deleteNote = async (note) => {
 
 </script>
 <template>
-<main class="flex flex-wrap items-center ">
+<main class="flex items-center flex-wrap">
 
-    <div v-if="loading" class="mt-40 ml-28 sm:ml-80 md:ml-80">
+    <div v-if="loading" class="mt-40 ml-28 sm:ml-80 md:ml-96">
     <Loader/>
     </div>
 
     <div v-else>
 
-    <div v-if="notes.length === 0" class="mt-2 left-margin sm:ml-[150px] sm:mt-4 md:mt-10 xl:ml-48">
+    <div v-if="notes.length === 0" class="mt-2 left-margin sm:ml-[150px] sm:mt-4 md:mt-10 xl:ml-72">
     <div>
         <img :src="Note" alt="Note" class="w-96 h-96">
     </div>
@@ -67,9 +69,9 @@ const deleteNote = async (note) => {
     </div>
     </div>
 
-    <div v-else>
+    <div class="flex items-center flex-wrap" v-else>
         <div v-for="note in notes" :key="note.id">
-    <div v-if="currentUser === note.email"  class="bg-gray-600 bg-opacity-20 rounded-md border border-gray-800 w-72 max-h-xl my-4 px-4 mx-2 space-y-4">
+    <div class="bg-gray-600 bg-opacity-20 rounded-md border border-gray-800 w-72 max-h-xl my-4 px-4 space-y-4 sm:mx-2">
     <div class="flex-between mt-6">
         <div class="space-x-3">
         <span :class="[ note.tag === 'Frontend' ? 'px-4 py-2 text-sm rounded-xl cursor-pointer bg-green-400 text-green-500 bg-opacity-30' : 'px-4 py-2 text-sm rounded-xl cursor-pointer bg-purple-500 text-purple-600 bg-opacity-30']">

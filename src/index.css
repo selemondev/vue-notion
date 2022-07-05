@@ -34,7 +34,7 @@
     }
 
     .left-margin {
-        @apply flex-grow px-4 sm:ml-[72px] md:px-0 xl:ml-[360px] 
+        @apply flex-grow px-4 sm:ml-[72px] md:px-0 xl:ml-[275px] 
     }
     .background-animate {
         background-size: 400%;
