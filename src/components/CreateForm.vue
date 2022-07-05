@@ -21,6 +21,7 @@ const fileUpload = () => {
 };
 
 const currentUser = auth.currentUser;
+console.log(auth)
 
 const handleSubmitNote = async () => {
   loading.value = true;
@@ -37,6 +38,7 @@ const handleSubmitNote = async () => {
     completed: false,
     description: description.value,
     tag: tag.value,
+    email: currentUser.email,
     member: member.value,
     media: sentImage || "",
     timeStamp: serverTimestamp()
