@@ -1,4 +1,7 @@
 <script setup>
+import { useNotesStore } from '../stores/useNotes';
+const store = useNotesStore();
+console.log(store.notesData)
 </script>
 
 <template>

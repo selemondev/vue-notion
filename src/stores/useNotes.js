@@ -1,15 +1,15 @@
 import { defineStore } from 'pinia'
-
+import { useStorage } from "@vueuse/core";
 export const useNotesStore = defineStore({
   id: 'notes',
   state: () => {
 		return {
-			notesData: [],
+			notesData: useStorage("token", ""),
 		}
 	},
   actions: {
-    saveNotes(notes) {
-      this.notesData = notes
+    saveToken(token) {
+      this.notesData = token
     }
   }
 });
