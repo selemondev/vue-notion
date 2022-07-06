@@ -6,6 +6,8 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { updateDoc , doc } from "firebase/firestore";
 import { auth, db } from "../firebaseConfig";
 import { useRouter } from "vue-router";
+import { useNotesStore } from "../stores/useNotes";
+const noteStore = useNotesStore()
 const router = useRouter();
 const formData = reactive({
     username: "",
@@ -33,8 +35,12 @@ const handleSubmit = async () => {
       await updateDoc(doc(db, "users", response.user.uid), {
         online: true
       });
+      noteStore.saveToken(response.user.uid);
+
+      if(response.user.uid) {
+        router.push("/")
+      }
     };
-    router.push("/")
     loading.value = false;
   } catch(error) {
     firebaseError.value = error.message

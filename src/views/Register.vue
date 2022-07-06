@@ -6,12 +6,15 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { setDoc, doc, Timestamp } from "firebase/firestore";
 import { auth, db } from "../firebaseConfig";
 import { useRouter } from "vue-router";
+import { useNotesStore } from "../stores/useNotes";
+const noteStore = useNotesStore()
 const router = useRouter();
 const formData = reactive({
   username: "",
   email: "",
   password: "",
   confirmPassword: "",
+  registerError: ""
 });
 
 
@@ -41,12 +44,16 @@ const handleSubmit = async () => {
         createdAt: Timestamp.fromDate(new Date()),
         online: true
       });
+      noteStore.saveToken(response.user.uid);
     };
-    router.push("/")
-    loading.value = false;
+    router.push("/login")
   } catch(error) {
-    console.log(error.message)
-  }
+    formData.registerError = error.message;
+    setTimeout(() => {
+      formData.registerError = ""
+    }, 3000)
+  };
+  loading.value = false;
 }
 
 </script>
@@ -79,6 +86,7 @@ const handleSubmit = async () => {
       <label for="password" class="label">ConfirmPassword</label>
       <input type="password" class="input-style" placeholder="confirmPassword" v-model="formData.confirmPassword">
        <p v-if="v$.confirmPassword.$error" class="error">{{ v$.confirmPassword.$errors[0].$message}}</p>
+        <p v-if="formData.registerError" class="error">{{ formData.registerError }}</p>
     </div>
 
     <div>

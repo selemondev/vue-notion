@@ -6,6 +6,10 @@ import { auth, db, storage } from "../firebaseConfig";
 import { useToast } from "vue-toastification";
 import { ref } from "vue";
 import { useRouter } from 'vue-router';
+import { useNotesStore } from '../stores/useNotes';
+const noteStore = useNotesStore();
+const tokenValue = ref("");
+tokenValue.value = noteStore.notesData;
 const router = useRouter();
 const title = ref("");
 const description = ref("");
@@ -41,6 +45,7 @@ const handleSubmitNote = async () => {
     email: currentUser.email,
     member: member.value,
     media: sentImage || "",
+    token: tokenValue.value,
     timeStamp: serverTimestamp()
   });
 
@@ -100,7 +105,7 @@ function removeSelectedImage() {
     <div class="flex flex-wrap -mx-3 mb-2">
     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
       <label class="block tracking-wide text-white text-base mb-2 md:text-xl" for="grid-first-name">
-        Members
+        Admin
       </label>
       <input class="input-style" id="grid-first-name" type="text" placeholder="e.g John Doe" v-model="member">
     </div>
@@ -117,7 +122,7 @@ function removeSelectedImage() {
 
   <div v-if="blob" class="mb-4">
   <div class="py-2">
-    <h2 class="text-white font-bold">Selected Member</h2>
+    <h2 class="text-white font-bold">Admin Photo</h2>
   </div>
       <div class="relative">
                 <div class="absolute w-8 h-8 bg-black bg-opacity-75 hover:bg-gray-800 rounded-full cursor-pointer flex items-center justify-center top-1 left-1">

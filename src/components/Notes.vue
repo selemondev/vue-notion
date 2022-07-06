@@ -3,32 +3,27 @@ import { auth, db } from "../firebaseConfig";
 import Note from "../assets/Note.svg";
 import { onAuthStateChanged } from "firebase/auth";
 import { FlagIcon, DotsVerticalIcon, TrashIcon, CheckIcon, XIcon } from "@heroicons/vue/outline";
-import { collection, query, onSnapshot, orderBy, updateDoc, doc, deleteDoc } from "@firebase/firestore";
+import { collection, query, onSnapshot, where , orderBy, updateDoc, doc, deleteDoc } from "@firebase/firestore";
 import { ref, watchEffect } from "vue";
+import { useNotesStore } from "../stores/useNotes";
 import Loader from "../components/Loader.vue";
 import dayjs from 'dayjs';
+const store = useNotesStore();
+const currentUserToken = ref("");
+currentUserToken.value = store.notesData;
 const notes = ref([]);
+const token = store.notesData;
 const loading = ref(false);
-const emailValue = ref("")
-const currentUser = ref("");
-const unsubscribe = () => {
-    onAuthStateChanged(auth, (user) => {
-    currentUser.value = user?.email;
-});
-};
-unsubscribe();
 watchEffect(() => {
     loading.value = true;
     const notesReference = collection(db, "notes");
-    const q = query(notesReference, orderBy("timeStamp", "desc"));
+    const q = query(notesReference, where("token", "in", [token]));
     const unsubscribe = onSnapshot(q, querySnapshot => {
         let notesData = [];
         querySnapshot.forEach(doc => {
             notesData.push({...doc.data(), id: doc.id})
         });
         notes.value = notesData;
-        emailValue.value = notes.value[0].email;
-        console.log(notes.value)
         loading.value = false;
     });
 
@@ -54,8 +49,8 @@ const deleteNote = async (note) => {
 <template>
 <main class="flex items-center flex-wrap">
 
-    <div v-if="loading" class="mt-40 ml-28 sm:ml-80 md:ml-96">
-    <Loader/>
+    <div v-if="loading && notes.length > 0" class="mt-40 ml-28 sm:ml-80 md:ml-96">
+         <Loader/>
     </div>
 
     <div v-else>
@@ -89,7 +84,7 @@ const deleteNote = async (note) => {
         <h2 :class="[note.completed ? 'text-white font-bold line-through' : 'text-white font-bold']">{{note.note}}</h2>
     </div>
 
-    <div>
+    <div class="w-full h-32 overflow-y-auto scrollbar-hide">
         <p :class="[note.completed ? 'text-gray-400 text-sm line-through' : 'text-gray-400 text-sm']">{{note.description}}</p>
     </div>
 
@@ -102,7 +97,7 @@ const deleteNote = async (note) => {
 
     <div class="flex-between space-x-3" v-else>
         <div class="flex items-center space-x-3">
-            <h3 :class="[note.completed ? 'text-gray-400 line-through' : 'text-gray-400']">Member :</h3>
+            <h3 :class="[note.completed ? 'text-gray-400 line-through' : 'text-gray-400']">Admin :</h3>
             <img :src="note.media" :alt="note.note" class="w-8 h-8 rounded-full" /> 
         </div>
 
