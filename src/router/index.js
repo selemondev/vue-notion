@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue';
 import Login from '../views/Login.vue';
 import Register from "../views/Register.vue";
 import { auth } from "../firebaseConfig";
@@ -20,14 +19,6 @@ const router = createRouter({
       component: Register
     },
     {
-      path: '/',
-      name: 'dashboard',
-      component: Home,
-      meta: {
-        auth
-      }
-    },
-    {
       path: "/create",
       name: "create",
       component: () => import("../views/Create.vue"),
@@ -36,17 +27,9 @@ const router = createRouter({
       }
     },
     {
-      path: "/tasks",
+      path: "/",
       name: "tasks",
       component: () => import("../views/Tasks.vue"),
-      meta: {
-        auth
-      }
-    },
-    {
-      path: "/message",
-      name: "message",
-      component: () => import("../views/Message.vue"),
       meta: {
         auth
       }

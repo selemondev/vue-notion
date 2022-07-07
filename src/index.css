@@ -53,4 +53,44 @@
           background-position: 100% 50%;
         }
       }
+
+      .mobileNav-tags {
+        @apply font-bold text-gray-400 hover:text-white duration-200 ease-in
+      }
+
+      .box1,.box2,.box3 {
+        margin: 5px;
+        width: 35px;
+        height: 3px;
+        background-color: #fff;
+        transition: all 400ms cubic-bezier(.84,.06,.52,1.8);
+    }
+    .sidebar {
+        height: 100%;
+        width: 250px;
+        top: -0.2%;
+        left: 0;
+        position: fixed;
+        z-index: 50;
+        background: #10101A;
+        display: inline-block;
+        list-style: none;
+        transition: all 0.5s;
+    }
+    .sidebar li {
+        margin: 10px;
+    }
+    .sidebar li a {
+        text-decoration: none;
+        font-size: 20px;
+    }
+     .rotate .box1{
+         transform: rotate(40deg) translate(8px,3px);
+     }
+     .rotate .box3{
+         transform: rotate(-45deg) translate(8px,-5px);
+       }
+     .rotate .box2{
+        opacity: 0;
+     }
 }
