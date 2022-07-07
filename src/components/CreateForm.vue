@@ -64,7 +64,7 @@ const handleSubmitNote = async () => {
     timeout: 4000
   });
 
-  router.push("/tasks")
+  router.push("/")
 };
 
 function removeSelectedImage() {

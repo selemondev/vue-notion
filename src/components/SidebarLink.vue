@@ -1,25 +1,15 @@
 <script setup>
-import { HomeIcon, CheckCircleIcon, ChatIcon, LightningBoltIcon, UserIcon } from "@heroicons/vue/outline";
+import { CheckCircleIcon, LightningBoltIcon, UserIcon } from "@heroicons/vue/outline";
 const sidebarMenu = [
     {
-        label: "Overview",
-        Icon: HomeIcon,
+        label : "My Tasks",
+        Icon : CheckCircleIcon,
         path: "/"
     },
     {
         label: "Create",
         Icon: LightningBoltIcon,
         path: "/create"
-    },
-    {
-        label : "My Tasks",
-        Icon : CheckCircleIcon,
-        path: "/tasks"
-    },
-    {
-        label: "Messages",
-        Icon: ChatIcon,
-        path: "/message"
     },
     {
         label: "Profile",

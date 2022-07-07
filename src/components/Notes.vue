@@ -1,9 +1,8 @@
 <script setup>
-import { auth, db } from "../firebaseConfig";
+import { db } from "../firebaseConfig";
 import Note from "../assets/Note.svg";
-import { onAuthStateChanged } from "firebase/auth";
 import { FlagIcon, DotsVerticalIcon, TrashIcon, CheckIcon, XIcon } from "@heroicons/vue/outline";
-import { collection, query, onSnapshot, where , orderBy, updateDoc, doc, deleteDoc } from "@firebase/firestore";
+import { collection, query, onSnapshot, where , updateDoc, doc, deleteDoc } from "@firebase/firestore";
 import { ref, watchEffect } from "vue";
 import { useNotesStore } from "../stores/useNotes";
 import Loader from "../components/Loader.vue";
@@ -49,7 +48,7 @@ const deleteNote = async (note) => {
 <template>
 <main class="flex items-center flex-wrap">
 
-    <div v-if="loading && notes.length > 0" class="mt-40 ml-28 sm:ml-80 md:ml-96">
+    <div v-if="loading" class="mt-40 ml-28 sm:ml-80 md:ml-96">
          <Loader/>
     </div>
 

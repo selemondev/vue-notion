@@ -1,26 +1,18 @@
 <script setup>
 import { CameraIcon } from '@heroicons/vue/outline';
 import { ref as StorageRef, uploadBytes, getDownloadURL, deleteObject} from "firebase/storage";
-import { updateDoc, doc, serverTimestamp, getDoc } from '@firebase/firestore';
-import { db, auth, storage } from "../firebaseConfig";
-// import { onAuthStateChanged } from "firebase/auth";
+import { updateDoc, doc, getDoc } from '@firebase/firestore';
+import { db, storage } from "../firebaseConfig";
 import { ref, watchEffect } from "vue";
 import { useToast } from "vue-toastification";
 import { useNotesStore } from '../stores/useNotes';
 const toast = useToast();
 const noteStore = useNotesStore();
-// const currentUser = ref("");
 const userData = ref([]);
 const token = ref("");
 const usernameValue = ref("");
 const avatarValue = ref("");
 const bioValue = ref("");
-// const unsubscribe = onAuthStateChanged(auth, (user) => {
-//     currentUser.value = user?.id;
-//     noteStore.saveToken(currentUser.value);
-// });
-// unsubscribe();
-console.log("Store: ", noteStore.notesData)
 token.value = noteStore.notesData;
 watchEffect(() => {
     getDoc(doc(db, "users", token.value)).then((docSnap) => {
@@ -132,8 +124,6 @@ const removeProfileImage = () => {
               <button type="submit" class="background-animate w-full appearance-none focus:outline-none py-2.5 text-white rounded-lg bg-purple-500 md:py-3" :disabled="usernameValue" v-if="bioValue">Profile Created</button>
             <button type="submit" class="background-animate w-full appearance-none focus:outline-none py-2.5 text-white rounded-lg bg-gradient-to-r from-purple-800 to-pink-600 md:py-3" v-else>{{ loading ? 'Creating Your Profile...' : 'Create Your Profile'}}</button>
         </div>
-
-
         </form>
     </div>
 </main>
