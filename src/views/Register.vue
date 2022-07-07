@@ -46,7 +46,7 @@ const handleSubmit = async () => {
       });
       noteStore.saveToken(response.user.uid);
     };
-    router.push("/login")
+    router.push("/")
   } catch(error) {
     formData.registerError = error.message;
     setTimeout(() => {
